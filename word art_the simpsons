@@ -1,0 +1,70 @@
+var simpsonsfamily =[];
+var minusbutton, plusbutton, pic, font;
+let s, speedSlider;
+simpsonsfamily = ["Homer Simpson", "Marge", "Lisa", "Bart Simpson","Maggie","Family","Love", "The Simpsons", "Happy"];
+a = 0;
+
+function preload() {
+  pic = loadImage("thesimpsons.png");
+}
+function setup()
+{
+  createCanvas(windowWidth, windowHeight);
+  
+  imageMode(CENTER);
+  pic = loadImage("thesimpsons.png");  
+  minusbutton = createElement('button', 'size-down');
+  minusbutton.position(0,20);
+  minusbutton.mousePressed(
+    function(){
+      a-=2;
+    }  
+  );
+  
+  plusbutton = createElement('button', 'size-up');
+  plusbutton.position(0,0);
+  plusbutton.mousePressed(
+    function(){
+      a+=1;
+    }  
+  );
+  
+  speedSlider = createSlider(0, 10, 0.1);
+  speedSlider.position(0, 40);
+    
+}
+
+
+function draw()
+{  
+   s=speedSlider.value();
+  for (i=0; i<=s; i++)
+  {    
+	ArtWord();
+  }
+}
+
+
+function ArtWord()
+{
+  var xpos =random(windowWidth);
+  var ypos = random(windowHeight);
+  var randomword = random(simpsonsfamily);
+  var randomcolor = pic.get(xpos,ypos);
+  var tsize = random(5,10)+a;
+  fill(randomcolor);
+  textSize(tsize);
+  text(randomword, xpos, ypos);
+}
+
+
+function keyPressed(){
+  if (key=="s"){
+    savework();
+  }
+}
+
+
+function savework(){
+    save('familywordart.jpg');
+  }
